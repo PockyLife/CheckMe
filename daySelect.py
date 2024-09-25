@@ -22,3 +22,10 @@ class DaysSelect(tk.Frame):
         self.thu.pack(side = tk.LEFT)
         self.fri.pack(side = tk.LEFT)
         self.sun.pack(side = tk.LEFT)
+
+    def get(self):
+        return [x.get() for x in self.selected]
+
+    def load(self, days: list):
+        for i in range(len(self.selected)):
+            self.selected[i].set(days[i])

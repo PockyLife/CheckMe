@@ -1,13 +1,19 @@
 import tkinter as tk
 import tkinter.ttk as ttk
+from alarmClass import Alarm
 from timeDisplay import TimeDisplay
 from daySelect import DaysSelect
+from customEntries import PlaceholderEntry
 
 class InputFrame(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
-        self.alarmName = ttk.Entry(self)
-        self.submit = ttk.Button(self, text = "Save Check")
+        self.parent = parent
+
+        self.alarmName = PlaceholderEntry(self, "Enter check name ...")
+        self.savedel = tk.Frame(self)
+        self.submit = ttk.Button(self.savedel, text = "Save Check", command = self.save)
+        self.deletebtn = ttk.Button(self.savedel, text = "Delete Check", command = self.delete)
         self.daySelect = DaysSelect(self)
         self.startEndFrame = tk.Frame(self)
 
@@ -27,7 +33,7 @@ class InputFrame(tk.Frame):
 
         self.frequencyFrame = tk.Frame(self)
         self.freqLabel = ttk.Label(self.frequencyFrame, text = "How many minutes between checks")
-        self.freqEntry = ttk.Entry(self.frequencyFrame)
+        self.freqEntry = PlaceholderEntry(self.frequencyFrame, "Enter minutes ...")
         self.freqLabel.pack(side = tk.LEFT)
         self.freqEntry.pack(side = tk.LEFT)
 
@@ -35,4 +41,30 @@ class InputFrame(tk.Frame):
         self.startEndFrame.pack(side = tk.TOP, pady = 20)
         self.frequencyFrame.pack(side = tk.TOP, pady = 10)
         self.daySelect.pack(side = tk.TOP, pady = 10)
-        self.submit.pack(side = tk.TOP)
+        self.savedel.pack(side = tk.TOP)
+        self.submit.pack(side = tk.LEFT, padx = 10)
+        self.deletebtn.pack(side = tk.LEFT, padx = 10)
+
+    def save(self):
+        savedAlarm = Alarm(self.alarmName.get(), self.startTime.get(), self.endTime.get(), int(self.freqEntry.get()), self.daySelect.get())
+        print(self.startTime.get())
+        print(self.endTime.get())
+        self.parent.alarmList.update(str(savedAlarm), savedAlarm)
+        
+    def delete(self):
+        self.parent.alarmList.delete(self.alarmName.get())
+    
+    def load(self, alarm: Alarm):
+        print(alarm.get_start())
+        print(alarm.get_end())
+        self.alarmName.delete(0, "end")
+        self.alarmName.insert(0, alarm.get_name())
+
+        self.freqEntry.delete(0, "end")
+        self.freqEntry.insert(0, alarm.get_frequency())
+
+        self.startTime.load(alarm.get_start())
+        
+        self.endTime.load(alarm.get_end())
+
+        self.daySelect.load(alarm.get_days())

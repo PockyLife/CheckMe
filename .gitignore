@@ -1,1 +1,10 @@
 test.py
+__pycache__/alarmClass.cpython-311.pyc
+__pycache__/alarmList.cpython-311.pyc
+__pycache__/customButtons.cpython-311.pyc
+__pycache__/customEntries.cpython-311.pyc
+__pycache__/daySelect.cpython-311.pyc
+__pycache__/entryClass.cpython-311.pyc
+__pycache__/inputFrame.cpython-311.pyc
+__pycache__/mainApp.cpython-311.pyc
+__pycache__/timeDisplay.cpython-311.pyc
