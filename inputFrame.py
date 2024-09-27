@@ -47,16 +47,12 @@ class InputFrame(tk.Frame):
 
     def save(self):
         savedAlarm = Alarm(self.alarmName.get(), self.startTime.get(), self.endTime.get(), int(self.freqEntry.get()), self.daySelect.get())
-        print(self.startTime.get())
-        print(self.endTime.get())
         self.parent.alarmList.update(str(savedAlarm), savedAlarm)
         
     def delete(self):
         self.parent.alarmList.delete(self.alarmName.get())
     
     def load(self, alarm: Alarm):
-        print(alarm.get_start())
-        print(alarm.get_end())
         self.alarmName.delete(0, "end")
         self.alarmName.insert(0, alarm.get_name())
 

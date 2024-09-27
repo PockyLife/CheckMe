@@ -35,3 +35,6 @@ class AlarmList(tk.Frame):
             self.parent.inputFrame.load(self.alarmDict[event.widget.get(selected[0])])
         else:
             print("NA")
+
+    def get(self):
+        return self.alarmDict
