@@ -27,7 +27,7 @@ class PlaceholderEntry(ttk.Entry):
     
     def on_entry_click(self, event):
         if self.get() == self.placeholder:
-            self.delete(0, "end") # delete all the text in the entry
+            self.delete(0, "end") #delete all the text in the entry
             self.insert(0, "") #Insert blank for user input
             self.config(foreground = "black")
     

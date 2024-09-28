@@ -20,9 +20,11 @@ class AlarmList(tk.Frame):
     
     def update(self, alarmName: str, alarm):
         if alarmName in self.alarmDict.keys():
-            pass
+            #delete old alarms
+            self.parent.update_schedule(alarm)
         else:
             self.alarms.insert(0, alarmName)
+            self.parent.update_schedule(alarm)
         self.alarmDict.update({alarmName: alarm})
 
     def delete(self, alarmName):
