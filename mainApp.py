@@ -20,12 +20,20 @@ class MainApplication(tk.Frame):
 
         self.notif = Notify(default_notification_title = "Title", default_notification_application_name = "Check Me")
 
-    def send_notification(self):
-        self.notif.message = "Ding"
+    def send_notification(self, message):
+        self.notif.message = message
         self.notif.send(block = False)
 
     def update_schedule(self, alarm: Alarm):
-        times = pd.date_range(alarm.get_start().isoformat(), alarm.get_end().isoformat(), freq = str(alarm.get_frequency())+"min").time
+        if alarm.get_start() > alarm.get_end():
+            print(alarm.get_start())
+            print(alarm.get_end())
+            times = pd.date_range(alarm.get_start().isoformat(), alarm.get_end().isoformat(), freq = str(alarm.get_frequency())+"min").time
+        else:
+            times = pd.date_range(alarm.get_start().isoformat(), alarm.get_end().isoformat(), freq = str(alarm.get_frequency())+"min").time
         print(times)
         for time in times:
-            self.schedule.daily(time, self.send_notification)
+            self.schedule.daily(time, self.send_notification, tags = {alarm.get_name()}, args = (alarm.get_name(),))
+
+    def delete_old_jobs(self, tag):
+        self.schedule.delete_jobs(tags = {tag})

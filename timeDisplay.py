@@ -27,7 +27,7 @@ class TimeDisplay(tk.Frame):
         self.mins_dec.pack(side = tk.TOP)
 
         self.ampm_inc = ttk.Button(self.ampm_display, text = "⋀", width = 5, command = self._swap_ampm)
-        self.ampm = AMPMEntry(self.ampm_display, "AM", width = 5)
+        self.ampm = AMPMEntry(self.ampm_display, "PM", width = 5)
         self.ampm_dec = ttk.Button(self.ampm_display, text = "⋁", width = 5, command = self._swap_ampm)
         self.ampm_inc.pack(side = tk.TOP)
         self.ampm.pack(side = tk.TOP)

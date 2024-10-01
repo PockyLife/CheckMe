@@ -12,7 +12,7 @@ def main():
         schedule.exec_jobs()
         root.after(30000, run_schedule)
     MainApplication(root, schedule).pack(side=tk.TOP, fill = tk.BOTH, expand = True)
-    root.after(30000, run_schedule) 
+    root.after(30000, run_schedule)
     root.mainloop()
 
 if __name__ == "__main__":

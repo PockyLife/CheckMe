@@ -20,7 +20,7 @@ class AlarmList(tk.Frame):
     
     def update(self, alarmName: str, alarm):
         if alarmName in self.alarmDict.keys():
-            #delete old alarms
+            self.parent.delete_old_jobs(alarmName)
             self.parent.update_schedule(alarm)
         else:
             self.alarms.insert(0, alarmName)
@@ -28,8 +28,10 @@ class AlarmList(tk.Frame):
         self.alarmDict.update({alarmName: alarm})
 
     def delete(self, alarmName):
-        self.alarmDict.pop(alarmName)
-        self.alarms.delete(self.alarms.curselection()[0])
+        if alarmName in self.alarmDict:
+            self.parent.delete_old_jobs(alarmName)
+            self.alarmDict.pop(alarmName)
+            self.alarms.delete(self.alarms.curselection()[0])
 
     def load(self, event):
         selected = event.widget.curselection()
