@@ -6,7 +6,7 @@ class AlarmList(tk.Frame):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
 
-        self.alarms = tk.Listbox(self)
+        self.alarms = tk.Listbox(self, exportselection = False)
         self.scrollbar = ttk.Scrollbar(self)
         self.alarms.config(yscrollcommand = self.scrollbar.set)
         self.scrollbar.config(command = self.alarms.yview)

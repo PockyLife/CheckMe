@@ -45,7 +45,7 @@ class InputFrame(tk.Frame):
         self.submit.pack(side = tk.LEFT, padx = 10)
         self.deletebtn.pack(side = tk.LEFT, padx = 10)
 
-    def save(self):
+    def save(self): #if selected update selected
         savedAlarm = Alarm(self.alarmName.get(), self.startTime.get(), self.endTime.get(), int(self.freqEntry.get()), self.daySelect.get())
         self.parent.alarmList.update(str(savedAlarm), savedAlarm)
         
