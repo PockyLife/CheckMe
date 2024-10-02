@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 import tkinter.ttk as ttk
 from alarmClass import Alarm
 from timeDisplay import TimeDisplay
@@ -46,8 +47,15 @@ class InputFrame(tk.Frame):
         self.deletebtn.pack(side = tk.LEFT, padx = 10)
 
     def save(self): #if selected update selected
-        savedAlarm = Alarm(self.alarmName.get(), self.startTime.get(), self.endTime.get(), int(self.freqEntry.get()), self.daySelect.get())
-        self.parent.alarmList.update(str(savedAlarm), savedAlarm)
+        if self.alarmName.is_empty():
+            tk.messagebox.showerror("Empty name", "Please enter a check name") 
+        elif self.freqEntry.is_empty():
+            tk.messagebox.showerror("Empty frequency", "Please enter a frequency")
+        elif self.startTime.get() > self.endTime.get():
+            tk.messagebox.showerror("Invalid Time", "Start time must be before end time")
+        else:
+            savedAlarm = Alarm(self.alarmName.get(), self.startTime.get(), self.endTime.get(), int(self.freqEntry.get()), self.daySelect.get())
+            self.parent.alarmList.update(str(savedAlarm), savedAlarm)
         
     def delete(self):
         self.parent.alarmList.delete(self.alarmName.get())

@@ -16,6 +16,7 @@ class AMPMEntry(ttk.Entry):
 class PlaceholderEntry(ttk.Entry):
     def __init__(self, parent, placeholder: str, *args, **kwargs):
         ttk.Entry.__init__(self, parent, *args, **kwargs)
+        self.empty = True
         
         self.parent = parent
         self.placeholder = placeholder
@@ -30,8 +31,13 @@ class PlaceholderEntry(ttk.Entry):
             self.delete(0, "end") #delete all the text in the entry
             self.insert(0, "") #Insert blank for user input
             self.config(foreground = "black")
+            self.empty = False
     
     def on_focusout(self, event):
         if self.get() == "":
             self.insert(0, self.placeholder)
             self.config(foreground = "grey")
+            self.empty = True
+
+    def is_empty(self):
+        return self.empty
