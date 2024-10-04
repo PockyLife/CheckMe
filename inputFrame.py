@@ -61,11 +61,9 @@ class InputFrame(tk.Frame):
         self.parent.alarmList.delete(self.alarmName.get())
     
     def load(self, alarm: Alarm):
-        self.alarmName.delete(0, "end")
-        self.alarmName.insert(0, alarm.get_name())
+        self.alarmName.load(alarm.get_name())
 
-        self.freqEntry.delete(0, "end")
-        self.freqEntry.insert(0, alarm.get_frequency())
+        self.freqEntry.load(alarm.get_frequency())
 
         self.startTime.load(alarm.get_start())
         

@@ -41,3 +41,9 @@ class PlaceholderEntry(ttk.Entry):
 
     def is_empty(self):
         return self.empty
+    
+    def load(self, string: str):
+        self.delete(0, "end")
+        self.insert(0, string)
+        self.config(foreground = "black")
+        self.empty = False
